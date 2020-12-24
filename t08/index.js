@@ -1,4 +1,4 @@
-var request = require("request");
+const fetch = require('node-fetch');
 const express = require('express');
 const app = express();
 const session = require('express-session');
@@ -8,8 +8,6 @@ const router = express.Router();
 app.use(session({secret: 'shhhhhhh', saveUninitialized: true, resave: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 var sess;
-var site = "";
-var info = "";
 
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -26,29 +24,27 @@ router.get('/', (req, res) => {
                 <a href="/">BACK</a>
             </form><br>
             <hr>
-            <p>url: ${site}</p>
+            <p>url: ${app.get('site')}</p>
             <hr>
             <div>
-            ${info}
+            ${app.get('info')}
             </div>
         `);
     }
     else
         res.sendFile(path.join(__dirname + '/index.html'));
 })
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     sess = req.session;
     sess.site = req.body.site;
-    
     app.set('done', false);
     if (sess.site) {
         app.set('done', true);
-        request({
-            uri: `${sess.site}`,}, function(error, response, body) {
-                info = body;
-                site = sess.site;
-            }
-        );
+        await fetch(sess.site)
+            .then(resp => resp.text()).then(body => {
+                app.set('info', body);
+                app.set('site', sess.site);
+            })
     }
     res.redirect('/');
 })
