@@ -8,13 +8,8 @@ const router = express.Router();
 app.use(session({secret: 'shhhhhhh', saveUninitialized: true, resave: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 var sess;
-var site;
-var info;
-
-// request({
-//     uri: "http://www.sitepoint.com",}, function(error, response, body) {
-//         console.log(body);
-// });
+var site = "";
+var info = "";
 
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -26,7 +21,7 @@ router.get('/', (req, res) => {
         res.end(`
             <h1>Show other sites</h1>
             <form action="/" method="POST">
-                <input type="text" name="site" id="site" placeholder="url"><br>
+                <input type="text" name="site" id="site" placeholder="url">
                 <button type="submit">go</button>
                 <a href="/">BACK</a>
             </form><br>
