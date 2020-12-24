@@ -1,0 +1,16 @@
+{
+  "name": "t08",
+  "version": "1.0.0",
+  "description": "Show other sites",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Karina Barinova",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express-session": "^1.17.1",
+    "request": "^2.88.2"
+  }
+}

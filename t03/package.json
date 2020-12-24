@@ -1,0 +1,16 @@
+{
+  "name": "charset",
+  "version": "1.0.0",
+  "description": "charset",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Karina Barinova",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express-session": "^1.17.1",
+    "windows-1252": "^1.0.0"
+  }
+}
